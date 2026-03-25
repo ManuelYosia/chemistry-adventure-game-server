@@ -1,0 +1,81 @@
+﻿Running Leaderboard Module Tests...
+
+Setup: Registering test users... SUCCESS (IDs: 17, 18)
+Setup: Saving level results... SUCCESS
+Test 1: Global Leaderboard Order... FAILED
+Array
+(
+    [0] => Array
+        (
+            [username] => progressionuser
+            [total_score] => 2500
+            [total_stars] => 6
+        )
+
+    [1] => Array
+        (
+            [username] => alice
+            [total_score] => 1000
+            [total_stars] => 3
+        )
+
+    [2] => Array
+        (
+            [username] => resultuser
+            [total_score] => 800
+            [total_stars] => 3
+        )
+
+    [3] => Array
+        (
+            [username] => bob
+            [total_score] => 800
+            [total_stars] => 2
+        )
+
+    [4] => Array
+        (
+            [username] => progressuser
+            [total_score] => 100
+            [total_stars] => 3
+        )
+
+)
+Test 2: Level Leaderboard Order... FAILED
+Array
+(
+    [0] => Array
+        (
+            [username] => progressionuser
+            [score] => 1000
+            [stars] => 3
+            [remaining_time] => 60
+        )
+
+    [1] => Array
+        (
+            [username] => alice
+            [score] => 1000
+            [stars] => 3
+            [remaining_time] => 50
+        )
+
+    [2] => Array
+        (
+            [username] => resultuser
+            [score] => 800
+            [stars] => 3
+            [remaining_time] => 45
+        )
+
+    [3] => Array
+        (
+            [username] => bob
+            [score] => 800
+            [stars] => 2
+            [remaining_time] => 40
+        )
+
+)
+
+Tests Completed.
