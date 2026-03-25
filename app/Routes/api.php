@@ -16,13 +16,13 @@ $router->get('/test', [TestController::class , 'index']);
 $router->get('/user', [UserController::class , 'index']);
 
 // Authentication Routes
-$router->post('/register', [AuthController::class, 'register']);
-$router->post('/login', [AuthController::class, 'login']);
+$router->post('/register', [AuthController::class , 'register']);
+$router->post('/login', [AuthController::class , 'login']);
 
 // Progress Routes
-$router->get('/progress', [ProgressController::class, 'index']);
-$router->post('/progress/update', [ProgressController::class, 'update']);
+$router->get('/progress', [ProgressController::class , 'index']);
+$router->post('/progress/update', [ProgressController::class , 'update']);
 
 // Level Result Routes
-$router->get('/user/results', [LevelResultController::class, 'index']);
-$router->post('/level-result/save', [LevelResultController::class, 'save']);
+$router->get('/user/results', [LevelResultController::class , 'index']);
+$router->post('/level-result/save', [LevelResultController::class , 'save']);

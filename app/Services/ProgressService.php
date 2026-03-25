@@ -28,19 +28,39 @@ class ProgressService {
 
         $updateData = [];
 
-        if (isset($newData['map_id'])) {
-            $maps = $current['unlocked_map_ids'];
-            if (!in_array($newData['map_id'], $maps)) {
-                $maps[] = $newData['map_id'];
-                $updateData['unlocked_map_ids'] = $maps;
+        if (isset($newData['level_ids'])) {
+            $levels = $current['unlocked_level_ids'];
+            $changed = false;
+            foreach ((array)$newData['level_ids'] as $lid) {
+                if (!in_array($lid, $levels)) {
+                    $levels[] = $lid;
+                    $changed = true;
+                }
             }
-        }
-
-        if (isset($newData['level_id'])) {
+            if ($changed) $updateData['unlocked_level_ids'] = $levels;
+        } elseif (isset($newData['level_id'])) {
             $levels = $current['unlocked_level_ids'];
             if (!in_array($newData['level_id'], $levels)) {
                 $levels[] = $newData['level_id'];
                 $updateData['unlocked_level_ids'] = $levels;
+            }
+        }
+
+        if (isset($newData['map_ids'])) {
+            $maps = $current['unlocked_map_ids'];
+            $changed = false;
+            foreach ((array)$newData['map_ids'] as $mid) {
+                if (!in_array($mid, $maps)) {
+                    $maps[] = $mid;
+                    $changed = true;
+                }
+            }
+            if ($changed) $updateData['unlocked_map_ids'] = $maps;
+        } elseif (isset($newData['map_id'])) {
+            $maps = $current['unlocked_map_ids'];
+            if (!in_array($newData['map_id'], $maps)) {
+                $maps[] = $newData['map_id'];
+                $updateData['unlocked_map_ids'] = $maps;
             }
         }
 

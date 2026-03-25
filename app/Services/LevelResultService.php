@@ -43,14 +43,24 @@ class LevelResultService {
             $this->levelResultRepository->save($data);
         }
 
-        // Update total player progress
-        if ($scoreImprovement > 0 || $starsImprovement > 0) {
-            $this->progressService->updateProgress($userId, [
-                'score' => $scoreImprovement,
-                'stars' => $starsImprovement,
-                'level_id' => $levelId, // Mark level as unlocked/completed in progress too
-                'map_id' => $mapId
-            ]);
+        // Update total player progress & Unlocks
+        $progressUpdate = [
+            'score' => $scoreImprovement,
+            'stars' => $starsImprovement,
+            'level_ids' => [$levelId],
+            'map_ids' => [$mapId]
+        ];
+
+        if (isset($data['next_level_id'])) {
+            $progressUpdate['level_ids'][] = $data['next_level_id'];
+        }
+        if (isset($data['next_map_id'])) {
+            $progressUpdate['map_ids'][] = $data['next_map_id'];
+            $progressUpdate['last_unlocked_map_id'] = $data['next_map_id'];
+        }
+
+        if ($scoreImprovement > 0 || $starsImprovement > 0 || isset($data['next_level_id']) || isset($data['next_map_id'])) {
+            $this->progressService->updateProgress($userId, $progressUpdate);
         }
 
         return true;
