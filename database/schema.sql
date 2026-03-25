@@ -9,7 +9,6 @@ USE chemistry_adventure;
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS level_results;
 DROP TABLE IF EXISTS player_progress;
-DROP TABLE IF EXISTS leaderboard;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS levels;
 

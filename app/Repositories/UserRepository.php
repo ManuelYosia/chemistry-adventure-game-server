@@ -41,4 +41,17 @@ class UserRepository {
         $stmt = $this->db->prepare("UPDATE users SET auth_token = :token WHERE user_id = :id");
         return $stmt->execute(['token' => $token, 'id' => $userId]);
     }
+
+    public function createInitialProgress(int $userId) {
+        $stmt = $this->db->prepare("
+            INSERT INTO player_progress (user_id, unlocked_map_ids, unlocked_level_ids, last_unlocked_map_id) 
+            VALUES (:user_id, :maps, :levels, :last_map)
+        ");
+        return $stmt->execute([
+            'user_id' => $userId,
+            'maps' => json_encode([1]),
+            'levels' => json_encode([1]),
+            'last_map' => 1
+        ]);
+    }
 }

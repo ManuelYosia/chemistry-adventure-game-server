@@ -22,7 +22,10 @@ class AuthService {
 
         $data['password_hash'] = password_hash($data['password'], PASSWORD_BCRYPT);
         
-        return $this->userRepository->create($data);
+        $userId = $this->userRepository->create($data);
+        $this->userRepository->createInitialProgress((int)$userId);
+
+        return $userId;
     }
 
     public function login(string $email, string $password) {

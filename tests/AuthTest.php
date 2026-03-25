@@ -27,6 +27,17 @@ function runTests() {
             'password' => 'password123'
         ]);
         echo "SUCCESS (User ID: $userId)\n";
+
+        // Verify progress initialization
+        echo "Test 1b: Progress Initialization... ";
+        $stmt = $db->prepare("SELECT * FROM player_progress WHERE user_id = :id");
+        $stmt->execute(['id' => $userId]);
+        $progress = $stmt->fetch();
+        if ($progress && $progress['last_unlocked_map_id'] == 1) {
+            echo "SUCCESS\n";
+        } else {
+            echo "FAILED (Progress not found or incorrect)\n";
+        }
     } catch (Exception $e) {
         echo "FAILED: " . $e->getMessage() . "\n";
     }
