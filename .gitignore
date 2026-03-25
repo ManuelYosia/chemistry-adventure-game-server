@@ -1,0 +1,13 @@
+/vendor/
+/.env
+/migrate_output.txt
+/migrate_output_last.txt
+/migrate_output_utf8.txt
+/migrate_utf8.txt
+/migrate_last_utf8.txt
+/auth_test_output.txt
+/auth_test_utf8.txt
+/test_output.txt
+/issues.json
+/issues.txt
+/test_router.php
