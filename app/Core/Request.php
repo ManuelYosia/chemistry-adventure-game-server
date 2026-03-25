@@ -25,7 +25,11 @@ class Request {
         return $path ?: '/';
     }
 
+    protected array $body = [];
+
     public function getBody() {
+        if (!empty($this->body)) return $this->body;
+
         if ($this->getMethod() === 'GET') {
             return $_GET;
         }
@@ -34,11 +38,30 @@ class Request {
             $input = file_get_contents('php://input');
             $data = json_decode($input, true);
             if (json_last_error() === JSON_ERROR_NONE) {
-                return $data;
+                return $data ?: [];
             }
-            return $_POST;
+            return $_POST ?: [];
         }
 
         return [];
+    }
+
+    public function setBody(array $data) {
+        $this->body = $data;
+    }
+
+    public function getHeaders() {
+        if (function_exists('getallheaders')) {
+            return getallheaders();
+        }
+
+        $headers = [];
+        foreach ($_SERVER as $key => $value) {
+            if (str_starts_with($key, 'HTTP_')) {
+                $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))));
+                $headers[$header] = $value;
+            }
+        }
+        return $headers;
     }
 }

@@ -24,6 +24,12 @@ class UserRepository {
         return $stmt->fetch();
     }
 
+    public function findByToken(string $token) {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE auth_token = :token");
+        $stmt->execute(['token' => $token]);
+        return $stmt->fetch();
+    }
+
     public function create(array $data) {
         $stmt = $this->db->prepare("
             INSERT INTO users (username, email, password_hash) 
