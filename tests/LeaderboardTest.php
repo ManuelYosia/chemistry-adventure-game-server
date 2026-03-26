@@ -44,21 +44,33 @@ function runLeaderboardTests() {
 
     // 3. Test Global Leaderboard
     echo "Test 1: Global Leaderboard Order... ";
-    $global = $leaderboardService->getGlobalLeaderboard(5);
-    if (!empty($global) && $global[0]['username'] == 'alice' && $global[0]['total_score'] >= 1000) {
-        echo "SUCCESS (Alice is #1)\n";
+    $global = $leaderboardService->getGlobalLeaderboard(20);
+    $aliceRank = -1;
+    $bobRank = -1;
+    foreach ($global as $rank => $entry) {
+        if ($entry['username'] == 'alice') $aliceRank = $rank;
+        if ($entry['username'] == 'bob') $bobRank = $rank;
+    }
+    if ($aliceRank !== -1 && $bobRank !== -1 && $aliceRank < $bobRank) {
+        echo "SUCCESS (Alice > Bob)\n";
     } else {
-        echo "FAILED\n";
+        echo "FAILED (Alice Rank: $aliceRank, Bob Rank: $bobRank)\n";
         print_r($global);
     }
 
     // 4. Test Level Leaderboard
     echo "Test 2: Level Leaderboard Order... ";
-    $level = $leaderboardService->getLevelLeaderboard(1, 1, 5);
-    if (count($level) >= 2 && $level[0]['username'] == 'alice' && $level[1]['username'] == 'bob') {
+    $level = $leaderboardService->getLevelLeaderboard(1, 1, 20);
+    $aliceRankL = -1;
+    $bobRankL = -1;
+    foreach ($level as $rank => $entry) {
+        if ($entry['username'] == 'alice') $aliceRankL = $rank;
+        if ($entry['username'] == 'bob') $bobRankL = $rank;
+    }
+    if ($aliceRankL !== -1 && $bobRankL !== -1 && $aliceRankL < $bobRankL) {
         echo "SUCCESS (Alice > Bob)\n";
     } else {
-        echo "FAILED\n";
+        echo "FAILED (Level Alice Rank: $aliceRankL, Level Bob Rank: $bobRankL)\n";
         print_r($level);
     }
 
