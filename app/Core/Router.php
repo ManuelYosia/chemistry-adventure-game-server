@@ -2,46 +2,55 @@
 
 namespace App\Core;
 
-class Router {
+class Router
+{
     protected array $routes = [];
     protected array $middleware = [];
+    protected ?string $lastMethod = null;
+    protected ?string $lastPath = null;
 
-    public function get($path, $callback) {
+    public function get($path, $callback)
+    {
         $path = rtrim($path, '/') ?: '/';
         $this->routes['GET'][$path] = $callback;
+        $this->lastMethod = 'GET';
+        $this->lastPath = $path;
         return $this; // For chaining
     }
 
-    public function post($path, $callback) {
+    public function post($path, $callback)
+    {
         $path = rtrim($path, '/') ?: '/';
         $this->routes['POST'][$path] = $callback;
+        $this->lastMethod = 'POST';
+        $this->lastPath = $path;
         return $this; // For chaining
     }
 
-    public function middleware($middleware) {
-        // Get the last registered route
-        $methods = array_keys($this->routes);
-        $lastMethod = end($methods);
-        $paths = array_keys($this->routes[$lastMethod]);
-        $lastPath = end($paths);
-
-        if (!isset($this->middleware[$lastMethod][$lastPath])) {
-            $this->middleware[$lastMethod][$lastPath] = [];
+    public function middleware($middleware)
+    {
+        if (!$this->lastMethod || !$this->lastPath) {
+            return $this;
         }
-        
+
+        if (!isset($this->middleware[$this->lastMethod][$this->lastPath])) {
+            $this->middleware[$this->lastMethod][$this->lastPath] = [];
+        }
+
         if (is_array($middleware)) {
-            $this->middleware[$lastMethod][$lastPath] = array_merge($this->middleware[$lastMethod][$lastPath], $middleware);
+            $this->middleware[$this->lastMethod][$this->lastPath] = array_merge($this->middleware[$this->lastMethod][$this->lastPath], $middleware);
         } else {
-            $this->middleware[$lastMethod][$lastPath][] = $middleware;
+            $this->middleware[$this->lastMethod][$this->lastPath][] = $middleware;
         }
 
         return $this;
     }
 
-    public function dispatch(Request $request) {
+    public function dispatch(Request $request)
+    {
         $method = $request->getMethod();
         $path = rtrim($request->getPath(), '/') ?: '/';
-        
+
         $callback = $this->routes[$method][$path] ?? null;
 
         if (!$callback) {
