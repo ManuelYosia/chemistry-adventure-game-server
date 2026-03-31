@@ -27,9 +27,10 @@ class UserController
         return Response::success([
             'username' => $user['username'],
             'email' => $user['email'],
-            'unlocked_maps' => $progress['unlocked_map_ids'] ?? [],
-            'unlocked_levels' => $progress['unlocked_level_ids'] ?? [],
-            'last_unlocked_map' => $progress['last_unlocked_map_id'] ?? 1
+            'highest_unlocked_map' => $progress['highest_unlocked_map_id'],
+            'highest_unlocked_level' => $progress['highest_unlocked_level_id'],
+            'total_score' => $progress['total_score'],
+            'total_stars' => $progress['total_stars']
         ], "User profile retrieved.");
     }
 

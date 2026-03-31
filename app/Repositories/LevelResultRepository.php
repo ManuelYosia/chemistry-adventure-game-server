@@ -18,6 +18,15 @@ class LevelResultRepository {
         return $stmt->fetchAll();
     }
 
+    public function getTotalsByUser(int $userId) {
+        $stmt = $this->db->prepare("
+            SELECT COALESCE(SUM(score), 0) as total_score, COALESCE(SUM(stars), 0) as total_stars
+            FROM level_results WHERE user_id = :user_id
+        ");
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function findByUserLevel(int $userId, int $mapId, int $levelId) {
         $stmt = $this->db->prepare("
             SELECT * FROM level_results 

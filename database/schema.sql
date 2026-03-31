@@ -30,14 +30,8 @@ CREATE TABLE player_progress (
     progress_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
 
-    total_score INT DEFAULT 0,
-    total_stars INT DEFAULT 0,
-
-    -- Stored as JSON arrays: [1,2,3]
-    unlocked_map_ids JSON,
-    unlocked_level_ids JSON,
-
-    last_unlocked_map_id INT DEFAULT 0,
+    highest_unlocked_map_id INT DEFAULT 1,
+    highest_unlocked_level_id INT DEFAULT 1,
 
     CONSTRAINT fk_progress_user
         FOREIGN KEY (user_id) REFERENCES users(user_id)

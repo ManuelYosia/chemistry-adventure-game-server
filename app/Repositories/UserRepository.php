@@ -50,14 +50,13 @@ class UserRepository {
 
     public function createInitialProgress(int $userId) {
         $stmt = $this->db->prepare("
-            INSERT INTO player_progress (user_id, unlocked_map_ids, unlocked_level_ids, last_unlocked_map_id) 
-            VALUES (:user_id, :maps, :levels, :last_map)
+            INSERT INTO player_progress (user_id, highest_unlocked_map_id, highest_unlocked_level_id) 
+            VALUES (:user_id, :map_id, :level_id)
         ");
         return $stmt->execute([
             'user_id' => $userId,
-            'maps' => json_encode([1]),
-            'levels' => json_encode([1]),
-            'last_map' => 1
+            'map_id' => 1,
+            'level_id' => 1
         ]);
     }
 }

@@ -19,13 +19,12 @@ class ProgressRepository {
     }
 
     public function update(int $userId, array $data) {
+        if (empty($data)) return false;
+
         $fields = [];
         $params = ['user_id' => $userId];
 
         foreach ($data as $key => $value) {
-            if ($key === 'unlocked_map_ids' || $key === 'unlocked_level_ids') {
-                $value = json_encode($value);
-            }
             $fields[] = "$key = :$key";
             $params[$key] = $value;
         }

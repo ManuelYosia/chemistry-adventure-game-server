@@ -22,45 +22,34 @@ class LevelResultService {
         $userId = (int)$data['user_id'];
         $mapId = (int)$data['map_id'];
         $levelId = (int)$data['level_id'];
+        $isCompleted = !empty($data['is_completed']);
 
         $existing = $this->levelResultRepository->findByUserLevel($userId, $mapId, $levelId);
         
-        // Calculate improvements
-        $scoreImprovement = 0;
-        $starsImprovement = 0;
-
         if ($existing) {
-            $scoreImprovement = max(0, $data['score'] - $existing['score']);
-            $starsImprovement = max(0, $data['stars'] - $existing['stars']);
-            
             // Only update if current performance is better
             if ($data['score'] > $existing['score'] || $data['stars'] > $existing['stars']) {
                 $this->levelResultRepository->save($data);
             }
         } else {
-            $scoreImprovement = $data['score'];
-            $starsImprovement = $data['stars'];
             $this->levelResultRepository->save($data);
         }
 
-        // Update total player progress & Unlocks
-        $progressUpdate = [
-            'score' => $scoreImprovement,
-            'stars' => $starsImprovement,
-            'level_ids' => [$levelId],
-            'map_ids' => [$mapId]
-        ];
+        // Handle Unlocks if level is completed
+        if ($isCompleted) {
+            $nextMapId = $mapId;
+            $nextLevelId = $levelId + 1;
 
-        if (isset($data['next_level_id'])) {
-            $progressUpdate['level_ids'][] = $data['next_level_id'];
-        }
-        if (isset($data['next_map_id'])) {
-            $progressUpdate['map_ids'][] = $data['next_map_id'];
-            $progressUpdate['last_unlocked_map_id'] = $data['next_map_id'];
-        }
+            if ($nextLevelId > 5) {
+                $nextMapId++;
+                $nextLevelId = 1;
+            }
 
-        if ($scoreImprovement > 0 || $starsImprovement > 0 || isset($data['next_level_id']) || isset($data['next_map_id'])) {
-            $this->progressService->updateProgress($userId, $progressUpdate);
+            // Update highest unlocked point
+            $this->progressService->updateProgress($userId, [
+                'highest_unlocked_map_id' => $nextMapId,
+                'highest_unlocked_level_id' => $nextLevelId
+            ]);
         }
 
         return true;
