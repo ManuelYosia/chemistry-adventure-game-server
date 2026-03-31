@@ -47,6 +47,7 @@ A robust, scalable PHP backend for the Chemistry Adventure game, built with a cu
 - `POST /login`: Authenticate and receive an `auth_token`.
 
 ### Progression & Results
+- `GET /user`: Retrieve authenticated user profile and progress (Requires Auth).
 - `GET /progress`: Retrieve current player progress (Requires Auth).
 - `POST /progress/update`: Manually update unlocked maps/levels (Requires Auth).
 - `POST /level-result/save`: Save level performance and auto-update progress (Requires Auth).

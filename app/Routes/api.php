@@ -17,6 +17,7 @@ $router->get('/', function () {
 // Authentication Routes
 $router->post('/register', [AuthController::class , 'register']);
 $router->post('/login', [AuthController::class , 'login']);
+$router->get('/user', [UserController::class , 'getUser'])->middleware(AuthMiddleware::class);
 
 // Progress Routes
 $router->get('/progress', [ProgressController::class , 'index'])->middleware(AuthMiddleware::class);
