@@ -14,10 +14,7 @@ class LevelResultController {
     }
 
     public function index(Request $request) {
-        $userId = $request->getBody()['user_id'] ?? null;
-        if (!$userId) {
-            return Response::error("User ID is required.", 400);
-        }
+        $userId = $request->getBody()['user_auth']['user_id'];
 
         try {
             $results = $this->levelResultService->getResults((int)$userId);
@@ -29,7 +26,8 @@ class LevelResultController {
 
     public function save(Request $request) {
         $data = $request->getBody();
-        $required = ['user_id', 'map_id', 'level_id', 'score', 'stars', 'is_completed'];
+        $data['user_id'] = $data['user_auth']['user_id'];
+        $required = ['map_id', 'level_id', 'score', 'stars', 'is_completed'];
         
         foreach ($required as $field) {
             if (!isset($data[$field])) {

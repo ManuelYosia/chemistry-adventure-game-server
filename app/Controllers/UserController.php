@@ -25,6 +25,7 @@ class UserController
         $progress = $this->progressService->getProgress($user['user_id']);
 
         return Response::success([
+            'user_id' => $user['user_id'],
             'username' => $user['username'],
             'email' => $user['email'],
             'highest_unlocked_map' => $progress['highest_unlocked_map_id'],
@@ -42,4 +43,4 @@ class UserController
             'query' => $_GET
         ], "User successful.");
     }
-}
+}

@@ -14,10 +14,7 @@ class ProgressController {
     }
 
     public function index(Request $request) {
-        $userId = $request->getBody()['user_id'] ?? null;
-        if (!$userId) {
-            return Response::error("User ID is required.", 400);
-        }
+        $userId = $request->getBody()['user_auth']['user_id'];
 
         try {
             $progress = $this->progressService->getProgress((int)$userId);
@@ -32,10 +29,7 @@ class ProgressController {
 
     public function update(Request $request) {
         $data = $request->getBody();
-        $userId = $data['user_id'] ?? null;
-        if (!$userId) {
-            return Response::error("User ID is required.", 400);
-        }
+        $userId = $data['user_auth']['user_id'];
 
         try {
             $this->progressService->updateProgress((int)$userId, $data);
