@@ -18,6 +18,14 @@ class LevelResultService {
         return $this->levelResultRepository->findByUser($userId);
     }
 
+    public function getMapTotalStars(int $userId, int $mapId) {
+        return $this->levelResultRepository->getTotalStarsByMap($userId, $mapId);
+    }
+
+    public function getMapResults(int $userId, int $mapId) {
+        return $this->levelResultRepository->findByUserAndMap($userId, $mapId);
+    }
+
     public function saveResult(array $data) {
         $userId = (int)$data['user_id'];
         $mapId = (int)$data['map_id'];

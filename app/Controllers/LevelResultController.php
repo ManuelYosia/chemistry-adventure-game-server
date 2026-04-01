@@ -24,6 +24,38 @@ class LevelResultController {
         }
     }
 
+    public function mapStars(Request $request) {
+        $userId = $request->getBody()['user_auth']['user_id'];
+        $mapId = $request->getBody()['map_id'] ?? null;
+
+        if (!$mapId) {
+            return Response::error("Field 'map_id' is required.", 400);
+        }
+
+        try {
+            $totalStars = $this->levelResultService->getMapTotalStars((int)$userId, (int)$mapId);
+            return Response::success(['total_stars' => $totalStars], "Total stars for map $mapId fetched successfully.");
+        } catch (\Exception $e) {
+            return Response::error($e->getMessage(), 500);
+        }
+    }
+
+    public function mapResults(Request $request) {
+        $userId = $request->getBody()['user_auth']['user_id'];
+        $mapId = $request->getBody()['map_id'] ?? null;
+
+        if (!$mapId) {
+            return Response::error("Field 'map_id' is required.", 400);
+        }
+
+        try {
+            $results = $this->levelResultService->getMapResults((int)$userId, (int)$mapId);
+            return Response::success($results, "Level results for map $mapId fetched successfully.");
+        } catch (\Exception $e) {
+            return Response::error($e->getMessage(), 500);
+        }
+    }
+
     public function save(Request $request) {
         $data = $request->getBody();
         $data['user_id'] = $data['user_auth']['user_id'];

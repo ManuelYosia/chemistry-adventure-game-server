@@ -120,6 +120,23 @@ function runLevelResultTests() {
         echo "FAILED (Result Score: " . $finalResults[0]['score'] . ", Progress Score: " . $finalProgress['total_score'] . ")\n";
     }
 
+    // 7. Test Map-Specific Stats
+    echo "Test 4: Get Map Total Stars... ";
+    $mapStars = $resultService->getMapTotalStars($userId, 1);
+    if ($mapStars == 3) {
+        echo "SUCCESS\n";
+    } else {
+        echo "FAILED (Stars: $mapStars)\n";
+    }
+
+    echo "Test 5: Get Map Results... ";
+    $mapResults = $resultService->getMapResults($userId, 1);
+    if (count($mapResults) == 1 && $mapResults[0]['level_id'] == 1) {
+        echo "SUCCESS\n";
+    } else {
+        echo "FAILED (Count: " . count($mapResults) . ")\n";
+    }
+
     echo "\nTests Completed.\n";
 }
 

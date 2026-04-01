@@ -25,6 +25,8 @@ $router->post('/progress/update', [ProgressController::class , 'update'])->middl
 
 // Level Result Routes
 $router->get('/user/results', [LevelResultController::class , 'index'])->middleware(AuthMiddleware::class);
+$router->get('/level-result/map-stars', [LevelResultController::class , 'mapStars'])->middleware(AuthMiddleware::class);
+$router->get('/level-result/map', [LevelResultController::class , 'mapResults'])->middleware(AuthMiddleware::class);
 $router->post('/level-result/save', [LevelResultController::class , 'save'])->middleware(AuthMiddleware::class);
 
 // Leaderboard Routes

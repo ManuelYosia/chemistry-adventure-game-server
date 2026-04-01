@@ -57,6 +57,12 @@ A robust, scalable PHP backend for the Chemistry Adventure game, built with a cu
 - `GET /leaderboard/global`: Fetch top performers game-wide.
 - `GET /leaderboard/level`: Fetch top performers for a specific level (`map_id`, `level_id`).
 
+### Map-Specific Stats
+- `GET /level-result/map-stars`: Get total stars earned in a map (Requires Auth, `map_id` query param).
+  - **Returns**: `{"status":"success", "data":{"total_stars": 12}}`
+- `GET /level-result/map`: Get performance details for all levels in a map (Requires Auth, `map_id` query param).
+  - **Returns**: `{"status":"success", "data": [{"result_id":1, "map_id":1, "level_id":1, "stars":3, ...}]}`
+
 ## 🧪 Testing
 
 Run the full verification suite to ensure all systems are operational:

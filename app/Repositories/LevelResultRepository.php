@@ -27,6 +27,32 @@ class LevelResultRepository {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getTotalStarsByMap(int $userId, int $mapId) {
+        $stmt = $this->db->prepare("
+            SELECT COALESCE(SUM(stars), 0) as total_stars
+            FROM level_results 
+            WHERE user_id = :user_id AND map_id = :map_id
+        ");
+        $stmt->execute([
+            'user_id' => $userId, 
+            'map_id' => $mapId
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total_stars'];
+    }
+
+    public function findByUserAndMap(int $userId, int $mapId) {
+        $stmt = $this->db->prepare("
+            SELECT * FROM level_results 
+            WHERE user_id = :user_id AND map_id = :map_id
+            ORDER BY level_id ASC
+        ");
+        $stmt->execute([
+            'user_id' => $userId,
+            'map_id' => $mapId
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findByUserLevel(int $userId, int $mapId, int $levelId) {
         $stmt = $this->db->prepare("
             SELECT * FROM level_results 
