@@ -22,6 +22,29 @@ class LevelResultService {
         return $this->levelResultRepository->getTotalStarsByMap($userId, $mapId);
     }
 
+    public function getAllMapTotalStars(int $userId) {
+        $results = $this->levelResultRepository->getAllMapTotalStars($userId);
+        
+        // Get highest unlocked map to fill in zeros for unplayed but unlocked maps
+        $progress = $this->progressService->getProgress($userId);
+        $maxMap = $progress['highest_unlocked_map_id'] ?? 1;
+
+        $resultsMap = [];
+        foreach ($results as $res) {
+            $resultsMap[(int)$res['map_id']] = (int)$res['total_stars'];
+        }
+
+        $finalResults = [];
+        for ($m = 1; $m <= $maxMap; $m++) {
+            $finalResults[] = [
+                'map_id' => $m,
+                'total_stars' => $resultsMap[$m] ?? 0
+            ];
+        }
+
+        return $finalResults;
+    }
+
     public function getMapResults(int $userId, int $mapId) {
         return $this->levelResultRepository->findByUserAndMap($userId, $mapId);
     }
@@ -48,7 +71,7 @@ class LevelResultService {
             $nextMapId = $mapId;
             $nextLevelId = $levelId + 1;
 
-            if ($nextLevelId > 5) {
+            if (!empty($data['is_final_level'])) {
                 $nextMapId++;
                 $nextLevelId = 1;
             }

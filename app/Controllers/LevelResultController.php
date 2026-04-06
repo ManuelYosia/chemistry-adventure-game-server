@@ -26,15 +26,17 @@ class LevelResultController {
 
     public function mapStars(Request $request) {
         $userId = $request->getBody()['user_auth']['user_id'];
-        $mapId = $request->getBody()['map_id'] ?? null;
-
-        if (!$mapId) {
-            return Response::error("Field 'map_id' is required.", 400);
-        }
 
         try {
-            $totalStars = $this->levelResultService->getMapTotalStars((int)$userId, (int)$mapId);
-            return Response::success(['total_stars' => $totalStars], "Total stars for map $mapId fetched successfully.");
+            $allMapStars = $this->levelResultService->getAllMapTotalStars((int)$userId);
+            
+            // Cast values to integers for consistent API response
+            foreach ($allMapStars as &$item) {
+                $item['map_id'] = (int)$item['map_id'];
+                $item['total_stars'] = (int)$item['total_stars'];
+            }
+            
+            return Response::success($allMapStars, "Total stars for all maps fetched successfully.");
         } catch (\Exception $e) {
             return Response::error($e->getMessage(), 500);
         }
