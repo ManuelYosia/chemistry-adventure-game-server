@@ -14,10 +14,17 @@ class LeaderboardRepository {
 
     public function getGlobalTop(int $limit = 10) {
         $stmt = $this->db->prepare("
-            SELECT u.username, p.total_score, p.total_stars 
+            SELECT 
+                u.username,
+                COALESCE(SUM(lr.score), 0) AS total_score,
+                COALESCE(SUM(lr.stars), 0) AS total_stars,
+                p.highest_unlocked_map_id,
+                p.highest_unlocked_level_id
             FROM player_progress p
             JOIN users u ON p.user_id = u.user_id
-            ORDER BY p.total_score DESC, p.total_stars DESC
+            LEFT JOIN level_results lr ON lr.user_id = p.user_id
+            GROUP BY p.user_id, u.username, p.highest_unlocked_map_id, p.highest_unlocked_level_id
+            ORDER BY total_score DESC, total_stars DESC
             LIMIT :limit
         ");
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);

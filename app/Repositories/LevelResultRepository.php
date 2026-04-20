@@ -94,9 +94,9 @@ class LevelResultRepository {
             return $stmt->execute([
                 'score' => $data['score'],
                 'stars' => $data['stars'],
-                'remaining_time' => $data['remaining_time'],
-                'bonus_score' => $data['bonus_score'],
-                'is_completed' => $data['is_completed'] ? 1 : 0,
+                'remaining_time' => $data['remaining_time'] ?? 0,
+                'bonus_score' => $data['bonus_score'] ?? 0,
+                'is_completed' => (isset($data['is_completed']) && $data['is_completed']) ? 1 : 0,
                 'result_id' => $existing['result_id']
             ]);
         } else {
@@ -110,9 +110,9 @@ class LevelResultRepository {
                 'level_id' => $data['level_id'],
                 'score' => $data['score'],
                 'stars' => $data['stars'],
-                'remaining_time' => $data['remaining_time'],
-                'bonus_score' => $data['bonus_score'],
-                'is_completed' => $data['is_completed'] ? 1 : 0
+                'remaining_time' => $data['remaining_time'] ?? 0,
+                'bonus_score' => $data['bonus_score'] ?? 0,
+                'is_completed' => (isset($data['is_completed']) && $data['is_completed']) ? 1 : 0
             ]);
         }
     }

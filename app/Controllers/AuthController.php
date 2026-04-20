@@ -42,4 +42,20 @@ class AuthController {
             return Response::error($e->getMessage(), 401);
         }
     }
+
+    public function logout(Request $request) {
+        $body = $request->getBody();
+        $user = $body['user_auth'] ?? null;
+
+        if (!$user) {
+            return Response::error("User not found.", 404);
+        }
+
+        try {
+            $this->authService->logout((int)$user['user_id']);
+            return Response::success([], "Logged out successfully.");
+        } catch (\Exception $e) {
+            return Response::error($e->getMessage(), 500);
+        }
+    }
 }
