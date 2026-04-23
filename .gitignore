@@ -11,3 +11,11 @@
 /issues.json
 /issues.txt
 /test_router.php
+ 
+/node_modules/
+/*.log
+/*.bin
+/test_mcp.js
+/test_pako.js
+/drawio_mcp_wrapper.js
+/test_mcp.js

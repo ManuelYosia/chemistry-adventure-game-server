@@ -1,0 +1,162 @@
+<mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    
+    <!-- App_Core Package -->
+    <mxCell id="100" value="App\Core" style="swimlane;startSize=26;fillColor=#f5f5f5;fontStyle=1;align=center;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="760" height="200" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="101" value="Router&#xa;---&#xa;#routes: array&#xa;#middleware: array&#xa;---&#xa;+get()&#xa;+post()&#xa;+dispatch()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="100">
+      <mxGeometry x="20" y="40" width="160" height="130" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="102" value="Request&#xa;---&#xa;#body: array&#xa;---&#xa;+getMethod()&#xa;+getPath()&#xa;+getBody()&#xa;+getHeaders()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="100">
+      <mxGeometry x="210" y="40" width="140" height="130" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="103" value="Response&#xa;---&#xa;---&#xa;+json()&#xa;+error()&#xa;+success()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="100">
+      <mxGeometry x="380" y="40" width="140" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="104" value="Database&#xa;---&#xa;-instance: PDO&#xa;---&#xa;+getInstance()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="100">
+      <mxGeometry x="550" y="40" width="140" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- App_Controllers Package -->
+    <mxCell id="200" value="App\Controllers" style="swimlane;startSize=26;fillColor=#dae8fc;fontStyle=1;align=center;" vertex="1" parent="1">
+      <mxGeometry x="40" y="280" width="760" height="220" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="201" value="AuthController&#xa;---&#xa;#authService&#xa;---&#xa;+register()&#xa;+login()&#xa;+logout()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="200">
+      <mxGeometry x="20" y="40" width="130" height="110" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="202" value="LeaderboardController&#xa;---&#xa;#leaderboardService&#xa;---&#xa;+global()&#xa;+level()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="200">
+      <mxGeometry x="160" y="40" width="140" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="203" value="LevelResultController&#xa;---&#xa;#levelResultService&#xa;---&#xa;+index()&#xa;+mapStars()&#xa;+save()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="200">
+      <mxGeometry x="310" y="40" width="140" height="110" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="204" value="ProgressController&#xa;---&#xa;#progressService&#xa;---&#xa;+index()&#xa;+update()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="200">
+      <mxGeometry x="460" y="40" width="130" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="205" value="UserController&#xa;---&#xa;#progressService&#xa;---&#xa;+getUser()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="200">
+      <mxGeometry x="600" y="40" width="130" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- App_Services Package -->
+    <mxCell id="300" value="App\Services" style="swimlane;startSize=26;fillColor=#d5e8d4;fontStyle=1;align=center;" vertex="1" parent="1">
+      <mxGeometry x="40" y="540" width="760" height="220" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="301" value="AuthService&#xa;---&#xa;#userRepository&#xa;---&#xa;+register()&#xa;+login()&#xa;+logout()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="300">
+      <mxGeometry x="20" y="40" width="130" height="110" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="302" value="LeaderboardService&#xa;---&#xa;#leaderboardRepository&#xa;---&#xa;+getGlobal()&#xa;+getLevel()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="300">
+      <mxGeometry x="170" y="40" width="150" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="303" value="LevelResultService&#xa;---&#xa;#levelResultRepo&#xa;#progressService&#xa;---&#xa;+getResults()&#xa;+saveResult()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="300">
+      <mxGeometry x="340" y="40" width="150" height="120" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="304" value="ProgressService&#xa;---&#xa;#progressRepo&#xa;#levelResultRepo&#xa;---&#xa;+getProgress()&#xa;+updateProgress()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="300">
+      <mxGeometry x="510" y="40" width="150" height="120" as="geometry" />
+    </mxCell>
+
+    <!-- App_Repositories Package -->
+    <mxCell id="400" value="App\Repositories" style="swimlane;startSize=26;fillColor=#ffe6cc;fontStyle=1;align=center;" vertex="1" parent="1">
+      <mxGeometry x="40" y="800" width="760" height="220" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="401" value="UserRepository&#xa;---&#xa;#db: PDO&#xa;---&#xa;+findByEmail()&#xa;+create()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="400">
+      <mxGeometry x="20" y="40" width="130" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="402" value="LeaderboardRepository&#xa;---&#xa;#db: PDO&#xa;---&#xa;+getGlobalTop()&#xa;+getLevelTop()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="400">
+      <mxGeometry x="170" y="40" width="150" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="403" value="LevelResultRepository&#xa;---&#xa;#db: PDO&#xa;---&#xa;+findByUser()&#xa;+save()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="400">
+      <mxGeometry x="340" y="40" width="150" height="100" as="geometry" />
+    </mxCell>
+    
+    <mxCell id="404" value="ProgressRepository&#xa;---&#xa;#db: PDO&#xa;---&#xa;+findByUserId()&#xa;+update()" style="shape=swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="400">
+      <mxGeometry x="510" y="40" width="140" height="100" as="geometry" />
+    </mxCell>
+
+    <!-- Relationships -->
+    <!-- Core Dependencies -->
+    <mxCell id="e1" value="uses" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="101" target="102">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e2" value="uses" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="101" target="103">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    
+    <!-- Router to Controllers -->
+    <mxCell id="e3" value="dispatches" style="endArrow=open;endSize=12;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="101" target="201">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Controllers to Services -->
+    <mxCell id="e4" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="201" target="301">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e5" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="202" target="302">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e6" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="203" target="303">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e7" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="204" target="304">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e8" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="205" target="304">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Services to Repositories -->
+    <mxCell id="e9" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="301" target="401">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e10" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="302" target="402">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e11" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="303" target="403">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e12" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="304" target="404">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Service dependencies -->
+    <mxCell id="e13" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="303" target="304">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e14" value="" style="endArrow=diamondThin;endFill=1;endSize=16;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="304" target="403">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Repositories to Database -->
+    <mxCell id="e15" value="uses" style="endArrow=open;endSize=12;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="401" target="104">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e16" value="uses" style="endArrow=open;endSize=12;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="402" target="104">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e17" value="uses" style="endArrow=open;endSize=12;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="403" target="104">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e18" value="uses" style="endArrow=open;endSize=12;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="404" target="104">
+      <mxGeometry width="160" relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
